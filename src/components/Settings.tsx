@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Save, Bell, Shield, Database, Users, Globe } from 'lucide-react';
+import { InfoTooltip } from './InfoTooltip';
 import './Settings.css';
 
 interface SettingSection {
@@ -28,29 +29,9 @@ export const Settings: React.FC = () => {
     maxStoragePerDevice: '1000',
     allowPersonalFiles: false,
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
-
-  const handleSaveChanges = async () => {
-    setIsLoading(true);
-    setSaveStatus('saving');
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSaveStatus('success');
-      setTimeout(() => setSaveStatus('idle'), 2000);
-    } catch (error) {
-      setSaveStatus('error');
-      setTimeout(() => setSaveStatus('idle'), 3000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleSettingChange = (key: string, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
-    setSaveStatus('idle');
   };
 
   const renderGeneralSettings = () => (
@@ -59,7 +40,10 @@ export const Settings: React.FC = () => {
       <div className="setting-group">
         <label className="setting-item">
           <div className="setting-info">
-            <span>Auto Backup</span>
+            <span>
+              Auto Backup
+              <InfoTooltip text="Automatically creates backup copies of device data to prevent data loss. Recommended for all managed devices." />
+            </span>
             <p>Automatically backup device data to central storage</p>
           </div>
           <input
@@ -71,7 +55,10 @@ export const Settings: React.FC = () => {
         
         <label className="setting-item">
           <div className="setting-info">
-            <span>Enable Compression</span>
+            <span>
+              Enable Compression
+              <InfoTooltip text="Reduces storage space usage by compressing data before backup. May slightly increase processing time but saves significant storage." />
+            </span>
             <p>Compress data to save storage space</p>
           </div>
           <input
@@ -83,7 +70,10 @@ export const Settings: React.FC = () => {
 
         <div className="setting-item">
           <div className="setting-info">
-            <span>Data Retention Period</span>
+            <span>
+              Data Retention Period
+              <InfoTooltip text="Number of days to keep archived data before automatic deletion. Longer periods require more storage but provide better data recovery options." />
+            </span>
             <p>How long to keep archived data (days)</p>
           </div>
           <input
@@ -103,7 +93,10 @@ export const Settings: React.FC = () => {
       <div className="setting-group">
         <div className="setting-item">
           <div className="setting-info">
-            <span>Max Storage Per Device</span>
+            <span>
+              Max Storage Per Device
+              <InfoTooltip text="Sets the maximum storage limit for each managed device. Prevents individual devices from consuming excessive storage resources." />
+            </span>
             <p>Maximum storage allocation per device (GB)</p>
           </div>
           <input
@@ -135,7 +128,10 @@ export const Settings: React.FC = () => {
       <div className="setting-group">
         <div className="setting-item">
           <div className="setting-info">
-            <span>Encryption Level</span>
+            <span>
+              Encryption Level
+              <InfoTooltip text="Security level for data encryption. AES-256 provides the highest security, AES-128 balances security and performance. 'None' disables encryption." />
+            </span>
             <p>Choose encryption standard for stored data</p>
           </div>
           <select

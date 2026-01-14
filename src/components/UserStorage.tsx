@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Search, Filter, RefreshCw, MoreHorizontal, ChevronRight, AlertTriangle, XCircle } from 'lucide-react';
+import { InfoTooltip } from './InfoTooltip';
 import './UserStorage.css';
+
+type TabType = 'overview' | 'properties' | 'devices' | 'user-storage';
 
 interface UserStorageData {
   id: string;
@@ -264,6 +267,7 @@ const getStateClass = (state: UserStorageData['state']) => {
 };
 
 export const UserStorage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<TabType>('user-storage');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [cloudPcSize, setCloudPcSize] = useState<'128' | '256'>('256');
@@ -355,7 +359,8 @@ export const UserStorage: React.FC = () => {
 
   return (
     <div className="user-storage">
-      <div className="user-storage-header">
+      {/* Fixed Header Section */}
+      <div className="user-storage-fixed-header">
         {/* Warning Banners */}
         {isOverQuota && (
           <div className="error-banner">
@@ -399,242 +404,490 @@ export const UserStorage: React.FC = () => {
             </button>
           </div>
         </div>
-
-        {/* Tab Navigation */}
-        <div className="tab-navigation">
-          <button className="tab-item">Overview</button>
-          <button className="tab-item">Properties</button>
-          <button className="tab-item">Devices</button>
-          <button className="tab-item active">User Storage</button>
-        </div>
       </div>
 
-      <div className="user-storage-content">
-
-      {/* Content Area */}
-      <div className="content-section">
-        <div className="storage-description">
-          <p>Monitor and manage user storage usage. <a href="#" className="learn-link">Learn more about User Experience Sync</a></p>
+      {/* Scrollable Section */}
+      <div className="user-storage-scrollable">
+        {/* Tab Navigation */}
+        <div className="tab-navigation">
+          <button 
+            className={`tab-item ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button 
+            className={`tab-item ${activeTab === 'properties' ? 'active' : ''}`}
+            onClick={() => setActiveTab('properties')}
+          >
+            Properties
+          </button>
+          <button 
+            className={`tab-item ${activeTab === 'devices' ? 'active' : ''}`}
+            onClick={() => setActiveTab('devices')}
+          >
+            Devices
+          </button>
+          <button 
+            className={`tab-item ${activeTab === 'user-storage' ? 'active' : ''}`}
+            onClick={() => setActiveTab('user-storage')}
+          >
+            User Storage
+          </button>
         </div>
 
-        {/* Storage Information */}
-        <div className="storage-info-section">
-          <h3>Storage Information</h3>
-          <div className="storage-metrics">
-            <div className="metric-item">
-              <span className="metric-label">Cloud PC size</span>
-              <select 
-                className="metric-dropdown"
-                value={cloudPcSize}
-                onChange={(e) => setCloudPcSize(e.target.value as '128' | '256')}
-              >
-                <option value="128">2vCPU / 8GB / 128GB</option>
-                <option value="256">2vCPU / 8GB / 256GB</option>
-              </select>
+        {/* Content Area */}
+        <div className="content-section">
+          {activeTab === 'overview' && (
+            <div className="overview-content">
+              <div className="essentials-section">
+                <h3>Essentials</h3>
+                <div className="essentials-grid">
+                  <div className="essential-item">
+                    <div className="essential-header">
+                      <div className="essential-icon">📱</div>
+                      <div>
+                        <h4>Contoso Hotel Staff</h4>
+                        <p className="essential-type">Frontline</p>
+                        <p className="essential-modified">Last modified 11/13/2025 02:25 PM</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="info-grid">
+                  <div className="info-row">
+                    <span className="info-label">Network</span>
+                    <span className="info-value">Microsoft hosted network</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Geography</span>
+                    <span className="info-value">US East</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Image</span>
+                    <span className="info-value">Supported</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Language</span>
+                    <span className="info-value">English (United States)</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Assigned</span>
+                    <span className="info-value">Yes</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Created by</span>
+                    <span className="info-value">Jason Parker</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="metric-item">
-              <span className="metric-label">Number of Cloud PCs</span>
-              <select 
-                className="metric-dropdown"
-                value={numberOfCloudPcs}
-                onChange={(e) => setNumberOfCloudPcs(parseInt(e.target.value))}
-              >
-                {[...Array(10)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>{i + 1}</option>
-                ))}
-              </select>
+          )}
+
+          {activeTab === 'properties' && (
+            <div className="properties-content">
+              <div className="properties-section">
+                <h3>General</h3>
+                <div className="property-group">
+                  <div className="property-item">
+                    <span className="property-label">Name</span>
+                    <span className="property-value">Contoso Hotel Staff</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Description</span>
+                      <span className="property-value">Access &gt; Full Control PC Desktop</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Domain join type</span>
+                    <span className="property-value">Hybrid</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">License type</span>
+                    <span className="property-value">Enterprise</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Use Microsoft Entra single sign-on</span>
+                    <span className="property-value">Yes</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">User type</span>
+                    <span className="property-value">Microsoft Entra users</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Geography</span>
+                    <span className="property-value">US East</span>
+                  </div>
+                </div>
+
+                <h3>Image</h3>
+                <div className="property-group">
+                  <div className="property-item">
+                    <span className="property-label">Image type</span>
+                    <span className="property-value">Gallery</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Image</span>
+                    <span className="property-value highlight">Windows 11 Enterprise + Microsoft 365 Apps</span>
+                  </div>
+                </div>
+
+                <h3>Configuration</h3>
+                <div className="property-group">
+                  <div className="property-item">
+                    <span className="property-label">Enable Unified Unbox</span>
+                    <span className="property-value">Yes</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Apply device name template</span>
+                    <span className="property-value">No</span>
+                  </div>
+                  <div className="property-item">
+                    <span className="property-label">Join a policy template</span>
+                    <span className="property-value">Yes</span>
+                  </div>
+                </div>
+
+                <h3>Assignment</h3>
+                <div className="assignment-table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Group</th>
+                        <th>Cloud PC size</th>
+                        <th>Number of Cloud PCs</th>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>UES Sample User Group</td>
+                        <td>Cloud PC Frontline 2vCPU/8GB/128GB</td>
+                        <td>2</td>
+                        <td>Contoso Hotel Staff</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-            <div className="metric-item">
-              <span className="metric-label">User Storage Max Size</span>
-              <select 
-                className="metric-dropdown"
-                value={userStorageMaxSize}
-                onChange={(e) => setUserStorageMaxSize(parseInt(e.target.value))}
-              >
-                <option value="4">4 GB</option>
-                <option value="8">8 GB</option>
-                <option value="16">16 GB</option>
-                <option value="32">32 GB</option>
-                <option value="64">64 GB</option>
-              </select>
-            </div>
-            <div className="metric-item">
-              <span className="metric-label">Total Users</span>
-              <div className="metric-input-group">
-                <input
-                  type="number"
-                  className="metric-input"
-                  value={totalUsersInput}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 999)) {
-                      setTotalUsersInput(value);
-                    }
-                  }}
-                  min="0"
-                  max="999"
-                  placeholder="0-999"
-                />
-                <button
-                  className="apply-btn"
-                  onClick={handleApplyUserCount}
-                  disabled={
-                    totalUsersInput === '' || 
-                    parseInt(totalUsersInput) < 0 || 
-                    parseInt(totalUsersInput) > 999 ||
-                    parseInt(totalUsersInput) === userData.length
-                  }
-                >
-                  Apply
+          )}
+
+          {activeTab === 'devices' && (
+            <div className="devices-content">
+              <div className="devices-description">
+                <p>Initiate actions and view action status for Cloud PCs over the last 90 days. <a href="#" className="learn-link">Learn more about Cloud PC actions</a></p>
+              </div>
+
+              <div className="devices-controls">
+                <button className="control-btn">
+                  <RefreshCw size={16} />
+                  Refresh
                 </button>
+                <button className="control-btn">
+                  Export
+                </button>
+                <button className="control-btn">
+                  Columns ▼
+                </button>
+                <button className="control-btn">
+                  Restart
+                </button>
+              </div>
+
+              <div className="search-section">
+                <div className="search-box">
+                  <Search size={16} />
+                  <input type="text" placeholder="Search" className="search-input" />
+                </div>
+                <button className="filter-btn">
+                  <Filter size={16} />
+                  Add filters
+                </button>
+              </div>
+
+              <div className="table-container">
+                <table className="devices-table">
+                  <thead>
+                    <tr>
+                      <th><input type="checkbox" /></th>
+                      <th>Cloud PC name</th>
+                      <th>Connected user</th>
+                      <th>Connected time</th>
+                      <th>Session time</th>
+                      <th>Provisioning status</th>
+                      <th>Last action</th>
+                      <th>Action status</th>
+                      <th>Last action date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="checkbox" /></td>
+                      <td className="device-name">CONT-ZF3SLP5ACL</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td><span className="status-badge provisioned">Provisioned</span></td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" /></td>
+                      <td className="device-name">CONT-PZZFSHMYSR</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td><span className="status-badge provisioned">Provisioned</span></td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                      <td>Not applicable</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'user-storage' && (
+            <div className="storage-content">
+              <div className="storage-description">
+                <p>Monitor and manage user storage usage. <a href="#" className="learn-link">Learn more about User Experience Sync</a></p>
+              </div>
+
+              {/* Storage Information */}
+              <div className="storage-info-section">
+            <h3>Storage Information</h3>
+            <div className="storage-metrics">
+              <div className="metric-item">
+                <span className="metric-label">
+                  Cloud PC size
+                  <InfoTooltip text="Select the virtual machine specification for your Cloud PCs. Higher specs provide more storage and processing power." />
+                </span>
+                <select 
+                  className="metric-dropdown"
+                  value={cloudPcSize}
+                  onChange={(e) => setCloudPcSize(e.target.value as '128' | '256')}
+                >
+                  <option value="128">2vCPU / 8GB / 128GB</option>
+                  <option value="256">2vCPU / 8GB / 256GB</option>
+                </select>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">
+                  Number of Cloud PCs
+                  <InfoTooltip text="Set how many Cloud PC instances are available for your organization. Total storage quota = Number of Cloud PCs × Storage size per PC. For example: 3 Cloud PCs × 128GB = 384GB total quota shared among all users." />
+                </span>
+                <select 
+                  className="metric-dropdown"
+                  value={numberOfCloudPcs}
+                  onChange={(e) => setNumberOfCloudPcs(parseInt(e.target.value))}
+                >
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">
+                  User Storage Max Size
+                  <InfoTooltip text="Maximum storage space allocated per user for syncing personal data and settings across devices." />
+                </span>
+                <select 
+                  className="metric-dropdown"
+                  value={userStorageMaxSize}
+                  onChange={(e) => setUserStorageMaxSize(parseInt(e.target.value))}
+                >
+                  <option value="4">4 GB</option>
+                  <option value="8">8 GB</option>
+                  <option value="16">16 GB</option>
+                  <option value="32">32 GB</option>
+                  <option value="64">64 GB</option>
+                </select>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">
+                  Total Users
+                  <InfoTooltip text="Specify the number of users to generate for testing. Range: 0-999. Click Apply to update the user list." />
+                </span>
+                <div className="metric-input-group">
+                  <input
+                    type="number"
+                    className="metric-input"
+                    value={totalUsersInput}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 999)) {
+                        setTotalUsersInput(value);
+                      }
+                    }}
+                    min="0"
+                    max="999"
+                    placeholder="0-999"
+                  />
+                  <button
+                    className="apply-btn"
+                    onClick={handleApplyUserCount}
+                    disabled={
+                      totalUsersInput === '' || 
+                      parseInt(totalUsersInput) < 0 || 
+                      parseInt(totalUsersInput) > 999 ||
+                      parseInt(totalUsersInput) === userData.length
+                    }
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Storage Progress Bar */}
+            <div className="storage-progress">
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${usagePercentage}%` }}
+                />
+              </div>
+              <div className="storage-stats">
+                <span>Total: <strong>{totalStorage} GB</strong></span>
+                {availableStorage > 0 ? (
+                  <span>Available: <strong>{availableStorage.toFixed(2)} GB</strong></span>
+                ) : (
+                  <span>Available: <strong>0 GB</strong></span>
+                )}
+                <span>Used: <strong>{usedStorage.toFixed(2)} GB</strong></span>
+                {exceededStorage > 0 && (
+                  <span className="exceeded">Exceeded: <strong>{exceededStorage.toFixed(2)} GB</strong></span>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Storage Progress Bar */}
-          <div className="storage-progress">
-            <div className="progress-bar">
-              <div 
-                className="progress-fill" 
-                style={{ width: `${usagePercentage}%` }}
+          {/* Table Controls */}
+          <div className="table-controls">
+            <button className="control-btn">
+              <RefreshCw size={16} />
+              Refresh
+            </button>
+            <button className="control-btn">
+              Columns ▼
+            </button>
+            <button className="control-btn">
+              Delete
+            </button>
+          </div>
+
+          {/* Search Bar */}
+          <div className="search-section">
+            <div className="search-box">
+              <Search size={16} />
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
               />
             </div>
-            <div className="storage-stats">
-              <span>Total: <strong>{totalStorage} GB</strong></span>
-              {availableStorage > 0 ? (
-                <span>Available: <strong>{availableStorage.toFixed(2)} GB</strong></span>
-              ) : (
-                <span>Available: <strong>0 GB</strong></span>
-              )}
-              <span>Used: <strong>{usedStorage.toFixed(2)} GB</strong></span>
-              {exceededStorage > 0 && (
-                <span className="exceeded">Exceeded: <strong>{exceededStorage.toFixed(2)} GB</strong></span>
-              )}
-            </div>
+            <button className="filter-btn">
+              <Filter size={16} />
+              Add filters
+            </button>
           </div>
-        </div>
 
-        {/* Table Controls */}
-        <div className="table-controls">
-          <button className="control-btn">
-            <RefreshCw size={16} />
-            Refresh
-          </button>
-          <button className="control-btn">
-            Columns ▼
-          </button>
-          <button className="control-btn">
-            Delete
-          </button>
-        </div>
-
-        {/* Search Bar */}
-        <div className="search-section">
-          <div className="search-box">
-            <Search size={16} />
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
-          </div>
-          <button className="filter-btn">
-            <Filter size={16} />
-            Add filters
-          </button>
-        </div>
-
-        {/* User Storage Table */}
-        <div className="table-container">
-          <table className="user-table">
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setSelectedUsers(currentUsers.map(u => u.id));
-                      } else {
-                        setSelectedUsers([]);
-                      }
-                    }}
-                    checked={selectedUsers.length === currentUsers.length && currentUsers.length > 0}
-                  />
-                </th>
-                <th>User</th>
-                <th>Used Size</th>
-                <th>Max Size</th>
-                <th>State</th>
-                <th>Last Attach</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
+          {/* User Storage Table */}
+          <div className="table-container">
+            <table className="user-table">
+              <thead>
+                <tr>
+                  <th>
                     <input
                       type="checkbox"
-                      checked={selectedUsers.includes(user.id)}
-                      onChange={() => handleSelectUser(user.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedUsers(currentUsers.map(u => u.id));
+                        } else {
+                          setSelectedUsers([]);
+                        }
+                      }}
+                      checked={selectedUsers.length === currentUsers.length && currentUsers.length > 0}
                     />
-                  </td>
-                  <td className="user-email">{user.user}</td>
-                  <td>{user.usedSizeGB.toFixed(2)} GB</td>
-                  <td>{user.maxSize}</td>
-                  <td>
-                    <span className={`state-badge ${getStateClass(user.state)}`}>
-                      {user.state}
-                    </span>
-                  </td>
-                  <td>{user.lastAttach}</td>
-                  <td>
-                    <button className="action-menu">
-                      <MoreHorizontal size={16} />
-                    </button>
-                  </td>
+                  </th>
+                  <th>User</th>
+                  <th>Used Size</th>
+                  <th>Max Size</th>
+                  <th>State</th>
+                  <th>Last Attach</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination */}
-        <div className="pagination">
-          <span>Rows per page: 10</span>
-          <span>{startIndex + 1}-{Math.min(endIndex, filteredUsers.length)} of {filteredUsers.length}</span>
-          <div className="pagination-controls">
-            <button 
-              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-            >
-              ←
-            </button>
-            {[...Array(Math.min(5, totalPages))].map((_, i) => {
-              const pageNum = i + 1;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={currentPage === pageNum ? 'active' : ''}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-            {totalPages > 5 && <span>...</span>}
-            <button 
-              onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-            >
-              →
-            </button>
+              </thead>
+              <tbody>
+                {currentUsers.map((user) => (
+                  <tr key={user.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedUsers.includes(user.id)}
+                        onChange={() => handleSelectUser(user.id)}
+                      />
+                    </td>
+                    <td className="user-email">{user.user}</td>
+                    <td>{user.usedSizeGB.toFixed(2)} GB</td>
+                    <td>{user.maxSize}</td>
+                    <td>
+                      <span className={`state-badge ${getStateClass(user.state)}`}>
+                        {user.state}
+                      </span>
+                    </td>
+                    <td>{user.lastAttach}</td>
+                    <td>
+                      <button className="action-menu">
+                        <MoreHorizontal size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+
+          {/* Pagination */}
+          <div className="pagination">
+            <span>Rows per page: 10</span>
+            <span>{startIndex + 1}-{Math.min(endIndex, filteredUsers.length)} of {filteredUsers.length}</span>
+            <div className="pagination-controls">
+              <button 
+                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+              >
+                ←
+              </button>
+              {[...Array(Math.min(5, totalPages))].map((_, i) => {
+                const pageNum = i + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={currentPage === pageNum ? 'active' : ''}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+              {totalPages > 5 && <span>...</span>}
+              <button 
+                onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+              >
+                →
+              </button>
+            </div>
+          </div>
+            </div>
+          )}
         </div>
-      </div>
       </div>
     </div>
   );
