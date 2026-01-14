@@ -210,6 +210,57 @@
   border-color: var(--primary-blue);
 }
 
+.metric-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-input {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--card-background);
+  width: 60px;
+  text-align: center;
+}
+
+.metric-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+.metric-input:invalid {
+  border-color: #dc3545;
+}
+
+.apply-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--primary-blue);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-blue);
+  background-color: var(--card-background);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apply-btn:hover:not(:disabled) {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.apply-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
 /* Storage Progress Bar */
 .storage-progress {
   margin-top: 16px;

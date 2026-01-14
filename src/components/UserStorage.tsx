@@ -270,10 +270,50 @@ export const UserStorage: React.FC = () => {
   const [numberOfCloudPcs, setNumberOfCloudPcs] = useState(2);
   const [userStorageMaxSize, setUserStorageMaxSize] = useState(32);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalUsersInput, setTotalUsersInput] = useState(mockUserData.length.toString());
+  const [userData, setUserData] = useState<UserStorageData[]>(mockUserData);
   const itemsPerPage = 10;
+
+  // Function to generate random user data
+  const generateUserData = (count: number): UserStorageData[] => {
+    const firstNames = ['David', 'Justin', 'James', 'Laura', 'Kevin', 'Sarah', 'Mike', 'Lisa', 'John', 'Emma', 'Chris', 'Anna', 'Robert', 'Jennifer', 'Mark', 'Maria', 'Paul', 'Susan', 'Daniel', 'Karen'];
+    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+    const states: Array<'Attached' | 'Pending' | 'Not attached'> = ['Attached', 'Pending', 'Not attached'];
+    const domain = 'thevoipdata001.onmicrosoft.com';
+    
+    return Array.from({ length: count }, (_, index) => {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const email = `${firstName.toLowerCase()}_${lastName.toLowerCase()}@${domain}`;
+      const usedSizeGB = Math.round((Math.random() * userStorageMaxSize + 0.1) * 100) / 100;
+      const state = states[Math.floor(Math.random() * states.length)];
+      const randomDate = new Date();
+      randomDate.setDate(randomDate.getDate() - Math.floor(Math.random() * 365));
+      
+      return {
+        id: (index + 1).toString(),
+        user: email,
+        usedSizeGB,
+        maxSize: `${userStorageMaxSize} GB`,
+        state,
+        lastAttach: randomDate.toLocaleString()
+      };
+    });
+  };
+
+  // Function to handle applying new user count
+  const handleApplyUserCount = () => {
+    const count = parseInt(totalUsersInput);
+    if (count >= 0 && count <= 999) {
+      const newUserData = generateUserData(count);
+      setUserData(newUserData);
+      setSelectedUsers([]);
+      setCurrentPage(1);
+    }
+  };
   
   // Update user data when max storage changes
-  const updatedUserData = mockUserData.map(user => ({
+  const updatedUserData = userData.map(user => ({
     ...user,
     usedSizeGB: Math.min(user.usedSizeGB, userStorageMaxSize),
     maxSize: `${userStorageMaxSize} GB`
@@ -286,7 +326,7 @@ export const UserStorage: React.FC = () => {
   const exceededStorage = usedStorage > totalStorage ? usedStorage - totalStorage : 0;
   const usagePercentage = Math.min((usedStorage / totalStorage) * 100, 100);
   const isOverQuota = usedStorage > totalStorage;
-  const totalUsers = mockUserData.length;
+  const totalUsers = userData.length;
   const potentialMaxUsage = userStorageMaxSize * totalUsers;
   const isPotentialOverQuota = potentialMaxUsage > totalStorage;
 
@@ -416,7 +456,34 @@ export const UserStorage: React.FC = () => {
             </div>
             <div className="metric-item">
               <span className="metric-label">Total users</span>
-              <span className="metric-value">{totalUsers}</span>
+              <div className="metric-input-group">
+                <input
+                  type="number"
+                  className="metric-input"
+                  value={totalUsersInput}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 999)) {
+                      setTotalUsersInput(value);
+                    }
+                  }}
+                  min="0"
+                  max="999"
+                  placeholder="0-999"
+                />
+                <button
+                  className="apply-btn"
+                  onClick={handleApplyUserCount}
+                  disabled={
+                    totalUsersInput === '' || 
+                    parseInt(totalUsersInput) < 0 || 
+                    parseInt(totalUsersInput) > 999 ||
+                    parseInt(totalUsersInput) === userData.length
+                  }
+                >
+                  Apply
+                </button>
+              </div>
             </div>
           </div>
 
