@@ -18,10 +18,6 @@ export const TopNavigation: React.FC = () => {
       
       <div className="nav-actions">
         <button className="nav-button">
-          <img src="https://via.placeholder.com/24x24/0078d4/ffffff?text=C" alt="Copilot" className="copilot-icon" />
-          Copilot
-        </button>
-        <button className="nav-button">
           <HelpCircle size={20} />
         </button>
         <button className="nav-button">
@@ -29,7 +25,7 @@ export const TopNavigation: React.FC = () => {
         </button>
         <button className="nav-button user-button">
           <div className="user-avatar">JP</div>
-          <span>rparker@thevoipdata001...</span>
+          <span>japarker@contoso.com</span>
         </button>
       </div>
     </header>

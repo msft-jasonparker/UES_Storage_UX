@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Filter, RefreshCw, MoreHorizontal, ChevronRight, AlertTriangle } from 'lucide-react';
+import { Search, Filter, RefreshCw, MoreHorizontal, ChevronRight, AlertTriangle, XCircle } from 'lucide-react';
 import './UserStorage.css';
 
 interface UserStorageData {
@@ -14,7 +14,7 @@ interface UserStorageData {
 const mockUserData: UserStorageData[] = [
   {
     id: '1',
-    user: 'david_lang@thevoipdata001.onmicrosoft.com',
+    user: 'david_lang@contoso.com',
     usedSizeGB: 6.96,
     maxSize: '32 GB',
     state: 'Attached',
@@ -22,7 +22,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '2',
-    user: 'justin_jong@thevoipdata001.onmicrosoft.com',
+    user: 'justin_jong@contoso.com',
     usedSizeGB: 28.13,
     maxSize: '32 GB',
     state: 'Pending',
@@ -30,7 +30,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '3',
-    user: 'james_garcia@thevoipdata001.onmicrosoft.com',
+    user: 'james_garcia@contoso.com',
     usedSizeGB: 4.64,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -38,7 +38,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '4',
-    user: 'laura_liang@thevoipdata001.onmicrosoft.com',
+    user: 'laura_liang@contoso.com',
     usedSizeGB: 9.79,
     maxSize: '32 GB',
     state: 'Attached',
@@ -46,7 +46,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '5',
-    user: 'kevin_reed@thevoipdata001.onmicrosoft.com',
+    user: 'kevin_reed@contoso.com',
     usedSizeGB: 13.35,
     maxSize: '32 GB',
     state: 'Pending',
@@ -54,7 +54,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '6',
-    user: 'justin_ryan@thevoipdata001.onmicrosoft.com',
+    user: 'justin_ryan@contoso.com',
     usedSizeGB: 2.12,
     maxSize: '32 GB',
     state: 'Attached',
@@ -62,7 +62,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '7',
-    user: 'heather_ning@thevoipdata001.onmicrosoft.com',
+    user: 'heather_ning@contoso.com',
     usedSizeGB: 18.86,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -70,7 +70,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '8',
-    user: 'elizabeth_chang@thevoipdata001.onmicrosoft.com',
+    user: 'elizabeth_chang@contoso.com',
     usedSizeGB: 4.35,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -78,7 +78,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '9',
-    user: 'justin_lang@thevoipdata001.onmicrosoft.com',
+    user: 'justin_lang@contoso.com',
     usedSizeGB: 29.65,
     maxSize: '32 GB',
     state: 'Attached',
@@ -86,7 +86,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '10',
-    user: 'james_all@thevoipdata001.onmicrosoft.com',
+    user: 'james_all@contoso.com',
     usedSizeGB: 3.24,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -94,7 +94,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '11',
-    user: 'sarah_wilson@thevoipdata001.onmicrosoft.com',
+    user: 'sarah_wilson@contoso.com',
     usedSizeGB: 15.47,
     maxSize: '32 GB',
     state: 'Attached',
@@ -102,7 +102,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '12',
-    user: 'michael_brown@thevoipdata001.onmicrosoft.com',
+    user: 'michael_brown@contoso.com',
     usedSizeGB: 22.88,
     maxSize: '32 GB',
     state: 'Pending',
@@ -110,7 +110,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '13',
-    user: 'anna_davis@thevoipdata001.onmicrosoft.com',
+    user: 'anna_davis@contoso.com',
     usedSizeGB: 8.12,
     maxSize: '32 GB',
     state: 'Attached',
@@ -118,7 +118,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '14',
-    user: 'robert_miller@thevoipdata001.onmicrosoft.com',
+    user: 'robert_miller@contoso.com',
     usedSizeGB: 31.92,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -126,7 +126,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '15',
-    user: 'lisa_taylor@thevoipdata001.onmicrosoft.com',
+    user: 'lisa_taylor@contoso.com',
     usedSizeGB: 12.34,
     maxSize: '32 GB',
     state: 'Attached',
@@ -134,7 +134,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '16',
-    user: 'mark_anderson@thevoipdata001.onmicrosoft.com',
+    user: 'mark_anderson@contoso.com',
     usedSizeGB: 19.76,
     maxSize: '32 GB',
     state: 'Pending',
@@ -142,7 +142,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '17',
-    user: 'jennifer_thomas@thevoipdata001.onmicrosoft.com',
+    user: 'jennifer_thomas@contoso.com',
     usedSizeGB: 7.89,
     maxSize: '32 GB',
     state: 'Attached',
@@ -150,7 +150,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '18',
-    user: 'chris_jackson@thevoipdata001.onmicrosoft.com',
+    user: 'chris_jackson@contoso.com',
     usedSizeGB: 24.56,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -158,7 +158,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '19',
-    user: 'amanda_white@thevoipdata001.onmicrosoft.com',
+    user: 'amanda_white@contoso.com',
     usedSizeGB: 16.23,
     maxSize: '32 GB',
     state: 'Attached',
@@ -166,7 +166,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '20',
-    user: 'daniel_harris@thevoipdata001.onmicrosoft.com',
+    user: 'daniel_harris@contoso.com',
     usedSizeGB: 11.45,
     maxSize: '32 GB',
     state: 'Pending',
@@ -174,7 +174,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '21',
-    user: 'nicole_martin@thevoipdata001.onmicrosoft.com',
+    user: 'nicole_martin@contoso.com',
     usedSizeGB: 26.78,
     maxSize: '32 GB',
     state: 'Attached',
@@ -182,7 +182,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '22',
-    user: 'paul_thompson@thevoipdata001.onmicrosoft.com',
+    user: 'paul_thompson@contoso.com',
     usedSizeGB: 5.91,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -190,7 +190,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '23',
-    user: 'stephanie_garcia@thevoipdata001.onmicrosoft.com',
+    user: 'stephanie_garcia@contoso.com',
     usedSizeGB: 20.14,
     maxSize: '32 GB',
     state: 'Attached',
@@ -198,7 +198,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '24',
-    user: 'ryan_martinez@thevoipdata001.onmicrosoft.com',
+    user: 'ryan_martinez@contoso.com',
     usedSizeGB: 14.67,
     maxSize: '32 GB',
     state: 'Pending',
@@ -206,7 +206,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '25',
-    user: 'melissa_rodriguez@thevoipdata001.onmicrosoft.com',
+    user: 'melissa_rodriguez@contoso.com',
     usedSizeGB: 30.21,
     maxSize: '32 GB',
     state: 'Attached',
@@ -214,7 +214,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '26',
-    user: 'kevin_lewis@thevoipdata001.onmicrosoft.com',
+    user: 'kevin_lewis@contoso.com',
     usedSizeGB: 9.33,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -222,7 +222,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '27',
-    user: 'rachel_lee@thevoipdata001.onmicrosoft.com',
+    user: 'rachel_lee@contoso.com',
     usedSizeGB: 17.82,
     maxSize: '32 GB',
     state: 'Attached',
@@ -230,7 +230,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '28',
-    user: 'jason_walker@thevoipdata001.onmicrosoft.com',
+    user: 'jason_walker@contoso.com',
     usedSizeGB: 23.45,
     maxSize: '32 GB',
     state: 'Pending',
@@ -238,7 +238,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '29',
-    user: 'kimberly_hall@thevoipdata001.onmicrosoft.com',
+    user: 'kimberly_hall@contoso.com',
     usedSizeGB: 6.78,
     maxSize: '32 GB',
     state: 'Attached',
@@ -246,7 +246,7 @@ const mockUserData: UserStorageData[] = [
   },
   {
     id: '30',
-    user: 'andrew_allen@thevoipdata001.onmicrosoft.com',
+    user: 'andrew_allen@contoso.com',
     usedSizeGB: 21.09,
     maxSize: '32 GB',
     state: 'Not attached',
@@ -279,7 +279,7 @@ export const UserStorage: React.FC = () => {
     const firstNames = ['David', 'Justin', 'James', 'Laura', 'Kevin', 'Sarah', 'Mike', 'Lisa', 'John', 'Emma', 'Chris', 'Anna', 'Robert', 'Jennifer', 'Mark', 'Maria', 'Paul', 'Susan', 'Daniel', 'Karen'];
     const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
     const states: Array<'Attached' | 'Pending' | 'Not attached'> = ['Attached', 'Pending', 'Not attached'];
-    const domain = 'thevoipdata001.onmicrosoft.com';
+    const domain = 'contoso.com';
     
     return Array.from({ length: count }, (_, index) => {
       const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -355,57 +355,61 @@ export const UserStorage: React.FC = () => {
 
   return (
     <div className="user-storage">
-      {/* Warning Banners */}
-      {isOverQuota && (
-        <div className="warning-banner">
-          <AlertTriangle size={20} />
-          <span>
-            The user storage for this policy has exceeded its quota. Add more cloud pcs or delete per-user storage to get under the quota total. In 7 days, the oldest per-user storage will be deleted.
-          </span>
-        </div>
-      )}
+      <div className="user-storage-header">
+        {/* Warning Banners */}
+        {isOverQuota && (
+          <div className="error-banner">
+            <XCircle size={20} />
+            <span>
+              ERROR: Storage quota exceeded. Add more Cloud PCs or delete user storage to resolve. Oldest storage will auto-delete in 7 days.
+            </span>
+          </div>
+        )}
 
-      {isPotentialOverQuota && !isOverQuota && (
-        <div className="warning-banner">
-          <AlertTriangle size={20} />
-          <span>
-            WARNING: Based on the user storage max size and the total number of users, this policy could exceed the storage quota.
-          </span>
-        </div>
-      )}
+        {isPotentialOverQuota && !isOverQuota && (
+          <div className="warning-banner">
+            <AlertTriangle size={20} />
+            <span>
+              Storage may exceed quota based on current max size and user count settings.
+            </span>
+          </div>
+        )}
 
-      {/* Breadcrumb Navigation */}
-      <div className="breadcrumb">
-        <span>Home</span>
-        <ChevronRight size={16} />
-        <span>Devices | Windows 365</span>
+        {/* Breadcrumb Navigation */}
+        <div className="breadcrumb">
+          <span>Home</span>
+          <ChevronRight size={16} />
+          <span>Devices | Windows 365</span>
+        </div>
+
+        {/* Page Header */}
+        <div className="page-header">
+          <div className="header-title">
+            <h1>Contoso Hotel Staff</h1>
+            <button className="close-button">×</button>
+          </div>
+          
+          <div className="page-actions">
+            <button className="action-btn">
+              <RefreshCw size={16} />
+              Reprovision
+            </button>
+            <button className="action-btn">
+              Delete
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="tab-navigation">
+          <button className="tab-item">Overview</button>
+          <button className="tab-item">Properties</button>
+          <button className="tab-item">Devices</button>
+          <button className="tab-item active">User Storage</button>
+        </div>
       </div>
 
-      {/* Page Header */}
-      <div className="page-header">
-        <div className="header-title">
-          <h1>Contoso Hotel Staff</h1>
-          <button className="close-button">×</button>
-        </div>
-        
-        <div className="page-actions">
-          <button className="action-btn">
-            <RefreshCw size={16} />
-            Reprovision
-          </button>
-          <button className="action-btn">
-            Delete
-          </button>
-        </div>
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="tab-navigation">
-        <button className="tab-item">Overview</button>
-        <button className="tab-item">Properties</button>
-        <button className="tab-item">Devices</button>
-        <button className="tab-item active">User storage</button>
-      </div>
+      <div className="user-storage-content">
 
       {/* Content Area */}
       <div className="content-section">
@@ -415,7 +419,7 @@ export const UserStorage: React.FC = () => {
 
         {/* Storage Information */}
         <div className="storage-info-section">
-          <h3>Storage information</h3>
+          <h3>Storage Information</h3>
           <div className="storage-metrics">
             <div className="metric-item">
               <span className="metric-label">Cloud PC size</span>
@@ -441,7 +445,7 @@ export const UserStorage: React.FC = () => {
               </select>
             </div>
             <div className="metric-item">
-              <span className="metric-label">User storage max size</span>
+              <span className="metric-label">User Storage Max Size</span>
               <select 
                 className="metric-dropdown"
                 value={userStorageMaxSize}
@@ -455,7 +459,7 @@ export const UserStorage: React.FC = () => {
               </select>
             </div>
             <div className="metric-item">
-              <span className="metric-label">Total users</span>
+              <span className="metric-label">Total Users</span>
               <div className="metric-input-group">
                 <input
                   type="number"
@@ -630,6 +634,7 @@ export const UserStorage: React.FC = () => {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

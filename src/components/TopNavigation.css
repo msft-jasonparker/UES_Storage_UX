@@ -65,12 +65,6 @@
   background-color: var(--neutral-100);
 }
 
-.copilot-icon {
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-}
-
 .user-avatar {
   width: 24px;
   height: 24px;

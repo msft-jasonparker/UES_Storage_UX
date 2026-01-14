@@ -28,9 +28,29 @@ export const Settings: React.FC = () => {
     maxStoragePerDevice: '1000',
     allowPersonalFiles: false,
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+
+  const handleSaveChanges = async () => {
+    setIsLoading(true);
+    setSaveStatus('saving');
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } catch (error) {
+      setSaveStatus('error');
+      setTimeout(() => setSaveStatus('idle'), 3000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSettingChange = (key: string, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
+    setSaveStatus('idle');
   };
 
   const renderGeneralSettings = () => (

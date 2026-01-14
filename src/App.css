@@ -170,4 +170,47 @@ body {
   .content-area {
     padding: 16px;
   }
+  
+  /* Hide sidebar on mobile, show hamburger menu instead */
+  .sidebar {
+    display: none;
+  }
+  
+  /* Responsive tables */
+  .table {
+    font-size: 12px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Tablet optimizations */
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile phone optimizations */
+  .content-area {
+    padding: 12px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
 }
