@@ -36,15 +36,14 @@ This project is configured for automatic deployment to GitHub Pages using GitHub
 
 ### **Manual Deployment (Alternative):**
 
-If you prefer manual deployment:
+If you need to deploy manually, you can build and use any static hosting service:
 
 ```bash
 # Build the project
 npm run build
 
-# Deploy to GitHub Pages manually
-npm install -g gh-pages
-gh-pages -d dist
+# The dist/ folder contains your production build
+# Upload the contents to any static hosting service
 ```
 
 ### **Environment Configuration:**
