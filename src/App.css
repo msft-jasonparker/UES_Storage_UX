@@ -1,0 +1,173 @@
+:root {
+  --primary-blue: #0078d4;
+  --primary-blue-hover: #106ebe;
+  --neutral-50: #fafafa;
+  --neutral-100: #f3f2f1;
+  --neutral-200: #edebe9;
+  --neutral-300: #e1dfdd;
+  --neutral-400: #d2d0ce;
+  --neutral-500: #c8c6c4;
+  --neutral-600: #a19f9d;
+  --neutral-700: #8a8886;
+  --neutral-800: #605e5c;
+  --neutral-900: #323130;
+  --text-primary: #323130;
+  --text-secondary: #605e5c;
+  --border-color: #e1dfdd;
+  --card-background: #ffffff;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --success-color: #107c10;
+  --warning-color: #ff8c00;
+  --error-color: #d13438;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--neutral-100);
+  line-height: 1.4;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Common UI Elements */
+.card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+}
+
+.button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.button-primary {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-blue-hover);
+}
+
+.button-secondary {
+  background-color: var(--neutral-200);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.button-secondary:hover {
+  background-color: var(--neutral-300);
+}
+
+.input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  background-color: var(--card-background);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-background);
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+  background-color: var(--neutral-200);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.table tbody tr:hover {
+  background-color: var(--neutral-100);
+}
+
+/* Status indicators */
+.status-healthy {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.status-warning {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.status-error {
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+/* Charts and metrics */
+.metric-card {
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+  
+  .content-area {
+    padding: 16px;
+  }
+}
