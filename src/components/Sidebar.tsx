@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, BarChart3, Monitor, Smartphone, Shield, BarChart, Users, Settings as SettingsIcon, ChevronRight } from 'lucide-react';
+import { Home, BarChart3, Monitor, Smartphone, Shield, BarChart, Users, ChevronRight } from 'lucide-react';
 import './Sidebar.css';
 
 type ActiveTab = 'home' | 'dashboard' | 'devices' | 'apps' | 'endpoint-security' | 'reports' | 'users';

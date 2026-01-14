@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Search, Filter, RefreshCw, MoreHorizontal, ChevronRight, AlertTriangle } from 'lucide-react';
 import './UserStorage.css';
 

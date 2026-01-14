@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, User, HelpCircle } from 'lucide-react';
+import { Search, Bell, HelpCircle } from 'lucide-react';
 import './TopNavigation.css';
 
 export const TopNavigation: React.FC = () => {
